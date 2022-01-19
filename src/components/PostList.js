@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions';
 
+import UserName from "./userName";
+
 class PostList extends React.Component{
     componentDidMount(){
         this.props.fetchPosts();
@@ -20,11 +22,7 @@ class PostList extends React.Component{
                             <p>{post.body}</p>
                         </div>
                     </div>
-                    <div className="extra content">
-                        <div className="right floated author">
-                            <img className="ui avatar image" src="/images/avatar/small/matt.jpg"></img> Matt
-                        </div>
-                    </div>
+                    <UserName userId={post.userId} />
                 </div>
             );
         })
