@@ -7,11 +7,38 @@ class PostList extends React.Component{
         this.props.fetchPosts();
     }
 
+    renderPostList(){
+        return this.props.posts.map((post)=>{
+            return (
+                <div className="ui raised link card" key={post.id}>
+                    <div className="content">
+                        <div className="header">{post.title}</div>
+                        <div className="meta">
+                        <span className="category">{post.id}</span>
+                        </div>
+                        <div className="description">
+                            <p>{post.body}</p>
+                        </div>
+                    </div>
+                    <div className="extra content">
+                        <div className="right floated author">
+                            <img className="ui avatar image" src="/images/avatar/small/matt.jpg"></img> Matt
+                        </div>
+                    </div>
+                </div>
+            );
+        })
+    }
+
     render() {
         return (
-            <div>PostList</div>
+            <div>{this.renderPostList()}</div>
         )
     }
 }
 
-export default connect(null, {fetchPosts: fetchPosts})(PostList);
+const mapStateToProps = (state)=>{
+    return {posts: state.posts }
+}
+
+export default connect(mapStateToProps, {fetchPosts: fetchPosts})(PostList);
